@@ -2,17 +2,16 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 /*import {useNavigate} from 'react-router-dom';
 import UserContext from './context/UserContext';
-import {toast} from 'react-toastify';
-import {useNavigate} from 'reac-router-dom';*/
+import {toast} from 'react-toastify';*/
+import {useNavigate} from 'react-router-dom';
 
 function Register() {
-  /*const navigate=useNavigate();
-    const{update}=useContext(UserContext);
+  const navigate=useNavigate();
+    /*const{update}=useContext(UserContext);*/
 
     let formObj={
-        username:"",
+        name:"",
         phone:"",
-        adress:"",
         email:"",
         password:""
     }
@@ -24,13 +23,13 @@ function Register() {
     }
 
     const kuldes=(adat)=>{
-        fetch('...........',{
+        fetch('http://localhost:80/api/fitness/register',{
             method:'POST',
             headers:{'Content-type':'application/json'},
             body:JSON.stringify(adat)
         })
         .then(res=>res.json())
-        .then(token=>{
+        /*.then(token=>{
             if(!token.message){
                 sessionStorage.setItem('usertoken',token);
                 //toast.success('Sikeres regisztráció!',{position: toast.POSITION.BOTTOM_RIGHT})
@@ -42,17 +41,19 @@ function Register() {
                 //toast.error(token.message,{position: toast.POSITION.BOTTOM_RIGHT});
                 alert(token.message);
             }
-        })
+        })*/
         //.catch(err=>toast.error(err,{position: toast.POSITION.BOTTOM_RIGHT}))
-        .catch(alert(error));
-    }*/
+        .then((result) => setSuccess(result))
+        .catch(error=>alert(error));
+    }
 
-const [succes,setSucces]=useState(false);
+const [success,setSuccess]=useState();
 
 const onSubmit=(e)=>{
   e.preventDefault();
-  //kuldes(formData);
-  setSucces(true);
+  kuldes(formData);
+  
+  
 }
 
   return (
@@ -71,6 +72,7 @@ const onSubmit=(e)=>{
                   id="name"
                   placeholder="Teljes név"
                   className="input input-bordered border-x-black w-full max-w-xs"
+                  onChange={(e)=>writeData(e)}
                 />
                  <label className="label">
                 <span className="label-text font-bold text-2xl">Telefon</span>
@@ -80,15 +82,7 @@ const onSubmit=(e)=>{
                   id="phone"
                   placeholder="Telefonszám +36 ..........."
                   className="input input-bordered border-x-black w-full max-w-xs"
-                />
-                <label className="label">
-                <span className="label-text font-bold text-2xl">Lakcím</span>
-              </label>
-                <input
-                  type="text"
-                  id="adress"
-                  placeholder="Lakcím"
-                  className="input input-bordered border-x-black w-full max-w-xs"
+                  onChange={(e)=>writeData(e)}
                 />
                 <label className="label">
                 <span className="label-text font-bold text-2xl">Email</span>
@@ -98,6 +92,7 @@ const onSubmit=(e)=>{
                   id="email"
                   placeholder="Email"
                   className="input input-bordered border-x-black w-full max-w-xs"
+                  onChange={(e)=>writeData(e)}
                 />
                 <label className="label">
                 <span className="label-text font-bold text-2xl">Jelszó</span>
@@ -107,13 +102,15 @@ const onSubmit=(e)=>{
                   id="password"
                   placeholder="Jelszó"
                   className="input input-bordered border-x-black w-full max-w-xs"
+                  onChange={(e)=>writeData(e)}
                 />
                
               </form>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-black" onClick={(e)=> onSubmit(e)}>Elküld</button>
-              {succes && <p className="text-green-500 mt-4">Sikeres regisztráció!</p>}
+              {!success ? <p className="text-red-500 mt-4">Sikertelen regisztráció!</p>:<></>
+              }
             </div>
           </div>
         </div>

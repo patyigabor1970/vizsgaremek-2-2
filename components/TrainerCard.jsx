@@ -18,15 +18,13 @@ function TrainerCard({ elem }) {
       <div className="flip-card">
         <div className="flip-card-inner">
           <div className="flip-card-front">
-            <img src={elem.image} className="widht 100%"></img>
+            <img src={elem.TrainerKepUrl} className="width 100%"></img>
           </div>
           <div className="flip-card-back">
-            <h1 className="h1">Name: {elem.name}</h1>
-            <p className="p">Species: {elem.status}</p>
-            <p className="p">Status: {elem.species}</p>
-            <p className="p">Gender: {elem.gender}</p>
+            <h1 className="h1">Name: {elem.Nev}</h1>
+            <p className="p">Phone: {elem.Telefonszam}</p>
             <p className="p">
-              <small className="p">{elem.origin.name}</small>
+              <small className="p text-[11px]">{elem.Leiras}</small>
             </p>
             <Link to="/training"><button className="btn btn-primary" id="training" value='/training'onClick={(e)=> handleButtonClick(e)}>Tovább a jelentkezéshez</button></Link>
           </div>

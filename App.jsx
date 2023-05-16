@@ -13,42 +13,30 @@ import Load from "./components/Load";
 import TrainerDatas from "./components/TrainerDatas";
 import GuestDatas from "./components/GuestDatas";
 
-
 function App() {
   return (
     <div>
-    <Header />
-        <div>
-          <Router>
+      <Header />
+      <div>
+        <Router>
           <Navbar />
           <Routes>
-         <Route path='/' element={<Main />}/>
-         <Route path='/trainers' element={<Trainers />}/>
-         <Route path='/training' element={<Training />}/>
-         <Route path='/price' element={<Price />}/>
-         <Route path='/login' element={<Login />}/>
-         <Route path='/register' element={<Register />}/>
-         <Route path='/load' element={<Load />}/>
-         <Route path='/trainerdatas' element={<TrainerDatas />}/>
-         <Route path='/guestdatas' element={<GuestDatas />}/>
-        
-        </Routes>
-      </Router>
-      
-       
-        
-        </div>
-        
-        <Footer />
-      
-         
-        
+            <Route path="/" element={<Main />} />
+            <Route path="/trainers" element={<Trainers />} />
+            <Route path="/training" element={<Training />} />
+            <Route path="/price" element={<Price />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/load" element={<Load />} />
+            <Route path="/trainerdatas" element={<TrainerDatas />} />
+            <Route path="/guestdatas" element={<GuestDatas />} />
+            <Route path="*" element={<Main />} />
+          </Routes>
+        </Router>
+      </div>
 
-
-      
-        </div>
-
-  
+      <Footer />
+    </div>
   );
 }
 

@@ -2,34 +2,38 @@ import { useLocation } from "react-router-dom";
 import Load from "./Load";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./Training.css";
 
 function Training() {
+  const [training,setTraining] = useState([]);
   const navigate = useNavigate();
 
   const handleButtonClick = (e) => {
     navigate(e.target.value);
   };
-
+  useEffect(() => {
+    fetch(`http://localhost:80/api/fitness`)
+      .then((res) => res.json())
+      .then((trainin) => setTraining(trainin))
+      .catch((err) => alert(err));
+  }, []);
   return (
-    <div>
+    
+    <div>{ training.length !== 0 ?
       <div className="hero max-h-screen bg-red-600">
         <div className="hero-content flex-col lg:flex-row">
           <img
-            src="src/images/main1.jpg"
+            src={training[0].KepUrl}
             className="max-w-lg rounded-lg shadow-2xl border-8 border-black"
           />
           <div>
-            <h1 className="text-5xl font-bold text-white" >Spinning</h1>
+            <h1 className="text-5xl font-bold text-white" >{training[0].Nev}</h1>
             <p className="py-6  text-2xl font-bold text-white text-justify">
-              A spinning az egyik legkiválóbb kardió edzés, mely egyszerre
-              fejleszti a testet és a lelket, a mentális képességeket és az
-              állóképességet is. Ez a mozgásforma méltán népszerű, mára már
-              filozófiává, életformává nőtte ki magát. A legjobb, hogy kortól és
-              nemtől függetlenül bárki űzheti.
+            {training[0].Leiras}
               Az időpontfoglaláshoz előzetesen be kell <a href="Login" className="text-2xl font-bold text-black">jelentkezned!</a>
             </p>
-            <Link to="/load" state={{ name: "SPINING", short: "spinning" }}>
+            <Link to="/load" state={{ name: training[0].Nev.toUpperCase(), short: training[0].Nev.toLowerCase() }}>
               <button
                 className="btn btn-primary hover:bg-black"
                 id="load"
@@ -41,24 +45,21 @@ function Training() {
             </Link>
           </div>
         </div>
-      </div>
+      </div> : <></>}{ training.length !== 0 ?
       <div className="hero max-h-screen bg-black">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             id="responsive"
-            src="src/images/main2.jpg"
+            src={training[1].KepUrl}
             className="max-w-lg rounded-lg shadow-2xl border-8 border-red-600"
           />
           <div>
-            <h1 className="text-5xl font-bold text-white">Aerobik</h1>
+            <h1 className="text-5xl font-bold text-white">{training[1].Nev}</h1>
             <p className="py-6 text-2xl font-bold text-white text-justify">
-              Az aerobik az aerob szóból származik. Definícióját tekintve
-              jelentése: „az oxigén jelenléte”. Minden gyakorlatot, ami nagy
-              izomcsoportok megmozgatását, ritmust és ismétléseket igényel,
-              ennek – vagyis oxigént igénylőnek – nevezhetünk.
+            {training[1].Leiras}
               Az időpontfoglaláshoz előzetesen be kell <a href="Login" className="text-2xl font-bold text-red-600">jelentkezned!</a>
             </p>
-            <Link to="/load" state={{ name: "AEROBIK", short: "arobic" }}>
+            <Link to="/load" state={{ name: training[0].Nev.toUpperCase(), short:  training[0].Nev.toLowerCase() }}>
               <button
                 className="btn btn-primary hover:bg-red-600"
                 id="load"
@@ -70,28 +71,20 @@ function Training() {
             </Link>
           </div>
         </div>
-      </div>
+      </div>: <></>}{ training.length !== 0 ?
       <div className="hero max-h-screen bg-red-600">
         <div className="hero-content flex-col lg:flex-row">
           <img
-            src="src/images/main3.jpg"
+            src={training[2].KepUrl}
             className="max-w-lg rounded-lg shadow-2xl border-8 border-black"
           />
           <div>
-            <h1 className="text-5xl font-bold text-white">CrossFit</h1>
+            <h1 className="text-5xl font-bold text-white">{training[2].Nev}</h1>
             <p className="py-6 text-5xl font-bold text-white text-justify">
-              A CrossFit a funkcionális edzés alapjaira épül, és annak
-              eszköztárát alkalmazza a programjai megalkotása során, egyaránt
-              merítve a súlyemelés, erőemelés, gimnasztika, állóképességi
-              sportok területéről. Egy mondatban meghatározva a CrossFit
-              funkcionális edzés magas intenzitáson végrehajtva állandó
-              változatosság mellett. 6 állomásos keret, cross fit rudak és
-              tárcsák, GHD pad, concept2 ergométer, airbike, kettlebell,
-              freerun- és stairmaster hiit futópad áll rendelkezésedre, hogy
-              fejleszd kondícionális képességeidet.
+            {training[2].Leiras}
               Az időpontfoglaláshoz előzetesen be kell <a href="Login" className="text-2xl font-bold text-black">jelentkezned!</a>
             </p>
-            <Link to="/load" state={{ name: "CROSSFIT", short: "crossfit" }}>
+            <Link to="/load" state={{ name: training[0].Nev.toUpperCase(), short: training[0].Nev.toLowerCase() }}>
               <button
                 className="btn btn-primary hover:bg-black"
                 id="load"
@@ -103,7 +96,7 @@ function Training() {
             </Link>
           </div>
         </div>
-      </div>
+      </div>: <></>}
       <div className="bg-black">
         <Link to="/">
           <button
@@ -115,6 +108,7 @@ function Training() {
         </Link>
       </div>
     </div>
+
   );
 }
 

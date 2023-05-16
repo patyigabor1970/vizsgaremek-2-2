@@ -1,4 +1,6 @@
+
 import "./PriceStyle.css";
+import Weekday from "./Weekday";
 
 
 function PriceTable({elem}) {
@@ -8,13 +10,13 @@ function PriceTable({elem}) {
         <tbody >
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                {elem.id}
+                {elem.Id}
                 </td>
                 <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                {elem.name}
+                {elem.trainer}
                 </td>
                 <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                {elem.status}
+                {elem.mozgasforma} <Weekday day={elem.HetNap} />
                 </td>
                 <td class="px-6 py-4">
                     <div className="flex items-center space-x-3">
@@ -32,7 +34,7 @@ function PriceTable({elem}) {
                     </div>
                 </td>
                 <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    $599
+                    ${elem.Oradij}
                 </td>
                 <td className="px-6 py-4">
                     <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">KOSÁRBA</a>
