@@ -8,10 +8,10 @@ function Price() {
   const [page] = useState(1);
 
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+    fetch(`http://localhost:80/api/fitness/prices`)
       .then((result) => result.json())
-      .then((adatok) => setPrice(adatok.results));
-  }, [page]);
+      .then((adatok) => setPrice(adatok));
+  }, []);
 
   return (
     <div id="bg">
